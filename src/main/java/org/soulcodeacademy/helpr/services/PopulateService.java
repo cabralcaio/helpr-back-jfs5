@@ -30,7 +30,7 @@ public class PopulateService {
     private PasswordEncoder encoder;
 
     @Autowired
-    private FuturoCandidatoReposytory futuroCandidatoReposytory;
+    private FuturoCandidatoRepository futuroCandidatoRepository;
 
     public void populate() {
         // Integer idCargo, String nome, String descricao, Double salario
@@ -63,7 +63,7 @@ public class PopulateService {
         this.funcionarioRepository.saveAll(List.of(f1, f2));
         this.clienteRepository.saveAll(List.of(cl1, cl2));
         this.chamadoRepository.saveAll(List.of(ch1, ch2));
-        this.futuroCandidatoReposytory.saveAll(List.of(fut1,fut2,fut3));
+        this.futuroCandidatoRepository.saveAll(List.of(fut1,fut2,fut3));
     }
 }
 
