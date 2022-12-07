@@ -45,7 +45,7 @@ public class FuturoCandidatoService {
         return this.futuroCandidatoRepository.findByEmailCandidato(emailCandidato);
     }
 
-    public FuturoCandidato salvar (FuturoCandidatoDTO dto) {
+    public FuturoCandidato salvarCandidato (FuturoCandidatoDTO dto) {
         FuturoCandidato novoCadidato = new FuturoCandidato(null, dto.getNomeCompleto(), dto.getEmailCandidato(), dto.getDescricao(), dto.getSetor());
 
         return this.futuroCandidatoRepository.save(novoCadidato);
