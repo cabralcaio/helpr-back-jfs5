@@ -57,7 +57,7 @@ public class PopulateService {
         Chamado ch2 = new Chamado(null, "Ativar VPN do sistema", "Conectar aos servidores remotos");
         ch2.setCliente(cl2);
         ch2.setFuncionario(f1);
-        ch2.setStatus(StatusChamado.ARQUIVADO);
+        ch2.setStatus(StatusChamado.ARQUIVADO);//Task feita no merge anterior
 
 
         FuturoCandidato fut1 = new FuturoCandidato(null, "Joaquin Severino", "joaquinseverino@gmail.com", "Quero trabalhar para Helpr pois sou muito competente", Setor.Marketing);

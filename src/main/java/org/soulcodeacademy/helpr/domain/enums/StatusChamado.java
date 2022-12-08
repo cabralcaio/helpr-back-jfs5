@@ -5,5 +5,5 @@ public enum StatusChamado {
     ATRIBUIDO, // Quando um funcionário está resolvendo o chamado
     CONCLUIDO, // Quando o chamado foi resolvido
 
-    ARQUIVADO // Quando o chamado for guardado
+    ARQUIVADO // Quando o chamado for guardado  // Task feita no merge anterior
 }
