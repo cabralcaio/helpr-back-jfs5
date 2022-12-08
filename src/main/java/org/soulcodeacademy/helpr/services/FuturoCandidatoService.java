@@ -20,16 +20,16 @@ public class FuturoCandidatoService {
         return this.futuroCandidatoRepository.findAll();
     }
 
-    public FuturoCandidato getFuturoCandidato(Integer idCandidatoFuturo) {
-        Optional<FuturoCandidato> futuroCandidato = this.futuroCandidatoRepository.findById(idCandidatoFuturo);
+    public FuturoCandidato getFuturoCandidato(Integer idFuturoCandidato) {
+        Optional<FuturoCandidato> futuroCandidato = this.futuroCandidatoRepository.findById(idFuturoCandidato);
 
         if (futuroCandidato.isEmpty()) {
-            // lançar exceção
             throw new RecursoNaoEncontradoError("Futuro candidato não encontrado!");
         } else {
             return futuroCandidato.get();
         }
     }
+
 
     public List<FuturoCandidato> listarPorNome (String nomeCompleto) {
 

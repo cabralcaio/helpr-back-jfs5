@@ -21,7 +21,12 @@ public class FuturoCandidatoController {
         return this.futuroCandidatoService.listaTodos();
     }
 
-    @GetMapping("candidatos/{setor}")
+    @GetMapping("/candidatos/{idFuturoCandidato}")
+    private FuturoCandidato getFuturoCandidato(@PathVariable Integer idFuturoCandidato) {
+        return this.futuroCandidatoService.getFuturoCandidato(idFuturoCandidato);
+    }
+
+    @GetMapping("/candidatos/setor/{setor}")
     private List<FuturoCandidato> listarPorSetor(@RequestParam Setor setor) {
         return this.futuroCandidatoService.listarPorSetor(setor);
     }
