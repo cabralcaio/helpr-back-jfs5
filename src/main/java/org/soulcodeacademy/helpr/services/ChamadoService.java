@@ -72,7 +72,7 @@ public class ChamadoService {
                     chamadoAtual.setFuncionario(funcionario);
                     chamadoAtual.setDataFechamento(LocalDate.now());
                 }
-                case ARQUIVADO -> {
+                case ARQUIVADO -> { //task feita no merge anterior
                     chamadoAtual.setStatus(StatusChamado.ARQUIVADO);
                     chamadoAtual.setFuncionario(funcionario);
                     chamadoAtual.setDataFechamento(LocalDate.now());
