@@ -6,7 +6,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 
-public class DependenteDTO {
+public class DependenteDTO { // Task feita no merge anterior
 
 
     @NotBlank(message = "O Campo Nome é Obrigatório!")
