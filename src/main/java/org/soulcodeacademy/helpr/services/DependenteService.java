@@ -10,17 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
-import java.time.Duration;
+
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.ZoneId;
-import java.time.temporal.TemporalField;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class DependenteService {
+public class DependenteService { //task feita no merge anterior
 
     @Autowired
     private DependenteRepository dependenteRepository;
