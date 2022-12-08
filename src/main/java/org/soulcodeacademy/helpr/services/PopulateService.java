@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 // Torna o objeto de PopulateService disponível para toda a aplicação (global)
@@ -28,6 +30,9 @@ public class PopulateService {
 
     @Autowired
     private PasswordEncoder encoder;
+
+    @Autowired
+    private DependenteRepository dependenteRepository;
 
     @Autowired
     private FuturoCandidatoRepository futuroCandidatoRepository;
@@ -52,7 +57,8 @@ public class PopulateService {
         Chamado ch2 = new Chamado(null, "Ativar VPN do sistema", "Conectar aos servidores remotos");
         ch2.setCliente(cl2);
         ch2.setFuncionario(f1);
-        ch2.setStatus(StatusChamado.ATRIBUIDO);
+        ch2.setStatus(StatusChamado.ARQUIVADO);
+
 
         FuturoCandidato fut1 = new FuturoCandidato(null, "Joaquin Severino", "joaquinseverino@gmail.com", "Quero trabalhar para Helpr pois sou muito competente", Setor.Marketing);
         FuturoCandidato fut2 = new FuturoCandidato(null, "Jaqueline Ferreira", "jaquelinesantos@gmail.com", "Quero trabalhar para Helpr pois sou muito competente", Setor.RecursosHumanos);
@@ -63,12 +69,12 @@ public class PopulateService {
         this.funcionarioRepository.saveAll(List.of(f1, f2));
         this.clienteRepository.saveAll(List.of(cl1, cl2));
         this.chamadoRepository.saveAll(List.of(ch1, ch2));
+
+        Dependente d1 = new Dependente("maria", "00000000000", LocalDate.parse("2017-02-16") , "fundamental", 1);
+
+        this.dependenteRepository.save(d1);
+
+
         this.futuroCandidatoRepository.saveAll(List.of(fut1,fut2,fut3));
     }
 }
-
-// O objetivo desta classe é inserir no banco, dados fictícios (de teste)
-// IOC = Inversion of Control = Inversão de Controle = É ele quem manda nas instâncias
-// Container = é o local onde o Spring guarda os objetos anotados
-// @Service = indica que a classe é um serviço
-// Injeção de Dependências = quando o Spring injeta os objetos na classe
