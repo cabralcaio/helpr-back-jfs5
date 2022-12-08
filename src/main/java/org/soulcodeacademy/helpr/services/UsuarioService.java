@@ -36,4 +36,14 @@ public class UsuarioService {
         }
     }
 
+    public Usuario getUsuarioById(Integer idUsuario){
+        Optional<Usuario> usuario = this.usuarioRepository.findById(idUsuario);
+        if (usuario.isEmpty()) {
+            // lançar exceção
+            throw new RecursoNaoEncontradoError("Usuário não encontrado!");
+        } else {
+            return usuario.get();
+        }
+    }
+
 }
