@@ -1,19 +1,15 @@
 package org.soulcodeacademy.helpr.services;
 
-import org.soulcodeacademy.helpr.domain.Cargo;
-import org.soulcodeacademy.helpr.domain.Chamado;
-import org.soulcodeacademy.helpr.domain.Cliente;
-import org.soulcodeacademy.helpr.domain.Funcionario;
+import org.soulcodeacademy.helpr.domain.*;
 import org.soulcodeacademy.helpr.domain.enums.Perfil;
 import org.soulcodeacademy.helpr.domain.enums.StatusChamado;
-import org.soulcodeacademy.helpr.repositories.CargoRepository;
-import org.soulcodeacademy.helpr.repositories.ChamadoRepository;
-import org.soulcodeacademy.helpr.repositories.ClienteRepository;
-import org.soulcodeacademy.helpr.repositories.FuncionarioRepository;
+import org.soulcodeacademy.helpr.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 // Torna o objeto de PopulateService disponível para toda a aplicação (global)
@@ -33,6 +29,9 @@ public class PopulateService {
 
     @Autowired
     private PasswordEncoder encoder;
+
+    @Autowired
+    private DependenteRepository dependenteRepository;
 
     public void populate() {
         // Integer idCargo, String nome, String descricao, Double salario
@@ -54,18 +53,19 @@ public class PopulateService {
         Chamado ch2 = new Chamado(null, "Ativar VPN do sistema", "Conectar aos servidores remotos");
         ch2.setCliente(cl2);
         ch2.setFuncionario(f1);
-        ch2.setStatus(StatusChamado.ATRIBUIDO);
+        ch2.setStatus(StatusChamado.ARQUIVADO);
+
 
         // vamos persistir as entidades = salvar no banco
         this.cargoRepository.saveAll(List.of(c1, c2, c3));
         this.funcionarioRepository.saveAll(List.of(f1, f2));
         this.clienteRepository.saveAll(List.of(cl1, cl2));
         this.chamadoRepository.saveAll(List.of(ch1, ch2));
+
+        Dependente d1 = new Dependente("maria", "00000000000", LocalDate.parse("2017-02-16") , "fundamental", 1);
+
+        this.dependenteRepository.save(d1);
+
+
     }
 }
-
-// O objetivo desta classe é inserir no banco, dados fictícios (de teste)
-// IOC = Inversion of Control = Inversão de Controle = É ele quem manda nas instâncias
-// Container = é o local onde o Spring guarda os objetos anotados
-// @Service = indica que a classe é um serviço
-// Injeção de Dependências = quando o Spring injeta os objetos na classe
