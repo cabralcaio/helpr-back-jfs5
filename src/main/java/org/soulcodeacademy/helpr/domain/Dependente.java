@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-public class Dependente {
+public class Dependente { // Task feita no merge anterior
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

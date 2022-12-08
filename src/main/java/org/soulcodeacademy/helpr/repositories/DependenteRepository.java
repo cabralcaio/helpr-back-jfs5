@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface DependenteRepository extends JpaRepository<Dependente,Integer> {
+public interface DependenteRepository extends JpaRepository<Dependente,Integer> { // Task feita no merge anterior
 
 
 
