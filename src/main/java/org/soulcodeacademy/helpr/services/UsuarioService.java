@@ -1,5 +1,6 @@
 package org.soulcodeacademy.helpr.services;
 
+import org.soulcodeacademy.helpr.domain.Chamado;
 import org.soulcodeacademy.helpr.domain.Usuario;
 import org.soulcodeacademy.helpr.repositories.UsuarioRepository;
 import org.soulcodeacademy.helpr.services.errors.RecursoNaoEncontradoError;
@@ -18,8 +19,8 @@ public class UsuarioService {
         return this.usuarioRepository.findByNomeContaining(nome);
     }
 
-    public Optional<Usuario> filtrarPorEmail (String email) {
-        return this.usuarioRepository.findByEmail(email);
+    public Usuario filtrarPorEmail (String email) {
+        return this.usuarioRepository.findByEmail(email).orElseThrow(() -> new RecursoNaoEncontradoError("Usuário não encontrado"));
     }
 
     public Optional<Usuario> filtrarPorCpf (String cpf) {
@@ -44,6 +45,10 @@ public class UsuarioService {
         } else {
             return usuario.get();
         }
+    }
+
+    public Integer retornaId(Usuario usuario) {
+        return usuario.getId();
     }
 
 }
