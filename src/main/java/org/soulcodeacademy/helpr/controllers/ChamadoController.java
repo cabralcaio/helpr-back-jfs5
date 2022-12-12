@@ -1,22 +1,46 @@
 package org.soulcodeacademy.helpr.controllers;
 
+import com.lowagie.text.DocumentException;
+import org.apache.logging.log4j.message.StringFormatterMessageFactory;
 import org.soulcodeacademy.helpr.domain.Chamado;
 import org.soulcodeacademy.helpr.domain.dto.ChamadoDTO;
 import org.soulcodeacademy.helpr.domain.enums.StatusChamado;
 import org.soulcodeacademy.helpr.services.ChamadoService;
+import org.soulcodeacademy.helpr.utils.PDFGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @RestController
 public class ChamadoController {
     @Autowired
     private ChamadoService chamadoService;
+    @GetMapping("/chamados/export/pdf")
+    public void exportToPDF(HttpServletResponse response) throws DocumentException, IOException {
+        response.setContentType("application/pdf");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String currentDateTime = dateFormatter.format(new Date());
+
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=users_" + currentDateTime + ".pdf";
+        response.setHeader(headerKey, headerValue);
+
+        List<Chamado> chamadoList = chamadoService.listarChamados();
+
+        PDFGenerator exporter = new PDFGenerator(chamadoList);
+        exporter.export(response);
+    }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_FUNCIONARIO')")
     @GetMapping("/chamados")
